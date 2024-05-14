@@ -1,0 +1,87 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: sqs-devopsdays-sp
+  title: Terraform SQS - DevopsDays SP 2024
+  description: Nosso exemplo de Software Template para criação de Terraform para um SQS
+  tags:
+    - iac
+    - terraform
+    - aws
+    - sqs
+    - devops-days
+  links:
+    - title: Documentação
+      url: https://backstage.io/docs/features/software-templates
+      icon: docs
+    - title: Repositório
+      url: https://github.com/gabriel-dantas98/backstage-devopsdays-sp
+      icon: github
+spec:
+  owner: user:gabriel-dantas
+  type: infra-as-code
+
+  parameters:
+    - title: Preencha os dados
+      required:
+        - name
+      properties:
+        name:
+          title: Nome
+          type: string
+          description: Digita pra gente o seu nome
+          ui:autofocus: true
+          ui:options:
+            rows: 5
+        company:
+          title: Diz pra gente qual você trabalha
+          type: string
+          ui:options:
+            rows: 5
+  steps:
+    - id: fetch-template
+      name: Renderizar Terraform
+      action: fetch:template
+      input:
+        targetPath: ./outputs/terraform
+        url: ./skeleton
+        values:
+          name: ${{ parameters.name }}
+          create_dlq: "true"
+          company: ${{ parameters.company }}
+  
+    - id: terraform_pr
+      name: Criar Pull Request do Terraform
+      action: publish:github:pull-request
+      input:
+        repoUrl: github.com?owner=gabriel-dantas98&repo=backstage-devopsdays-sp
+        branchName: 'sw-template/sqs/${{ parameters.name }}'
+        title: '🔩 Create ${{ parameters.name }} AWS SQS'
+        description: |
+          ## Criando a fila ${{ parameters.namme }}
+          
+          Esse é somente um pull request inicial para criar uma fila SQS básica, sinta-se avontade para atualizar com mais parâmetros.
+
+          Se você precisar adicionar mais parâmetros, cheque a documentação oficial - https://registry.terraform.io/modules/terraform-aws-modules/sqs/aws/latest
+
+          *criado por: [Backstage Software Template](https://backstage.io/docs/features/software-templates)* 👷‍♂️⚙️👷‍♀️
+        sourcePath: ./templates/outputs
+        targetPath: 'aws/production/sqs/${{ parameters.queue_name }}'
+
+    - id: label_pr
+      name: Adiciona labels no PR
+      action: github:issues:label
+      input:
+        repoUrl: github.com?owner=gabriel-dantas98&repo=backstage-devopsdays-sp
+        number: '${{ steps.terraform_pr.output.pullRequestNumber }}'
+        labels:
+          - terraform
+          - created-by-backstage
+          - ${{ parameters.name }}
+          - sqs
+
+  output:
+    links:
+      - title: Veja seu Pull Request :D
+        icon: github
+        url:  ${{ steps.terraform_pr.output.remoteUrl }}
