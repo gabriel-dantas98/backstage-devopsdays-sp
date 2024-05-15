@@ -19,7 +19,6 @@ module "sqs" {
 
   {%- if values.create_dlq %}
   redrive_policy = {
-    # default is 5 for this module
     maxReceiveCount = 10
   }
   {%- endif %}
