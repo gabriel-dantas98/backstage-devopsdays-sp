@@ -58,7 +58,7 @@ spec:
         branchName: 'sw-template/sqs/${{ parameters.name }}'
         title: '🔩 Create ${{ parameters.name }} AWS SQS'
         description: |
-          ## Criando a fila ${{ parameters.namme }}
+          ## Criando a fila ${{ parameters.name }}
           
           Esse é somente um pull request inicial para criar uma fila SQS básica, sinta-se avontade para atualizar com mais parâmetros.
 
