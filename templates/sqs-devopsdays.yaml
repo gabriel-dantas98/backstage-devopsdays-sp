@@ -65,7 +65,7 @@ spec:
           Se você precisar adicionar mais parâmetros, cheque a documentação oficial - https://registry.terraform.io/modules/terraform-aws-modules/sqs/aws/latest
 
           *criado por: [Backstage Software Template](https://backstage.io/docs/features/software-templates)* 👷‍♂️⚙️👷‍♀️
-        sourcePath: ./templates/outputs
+        sourcePath: ./outputs/terraform
         targetPath: '/terraform/aws/production/sqs/${{ parameters.name }}'
 
     - id: label_pr
