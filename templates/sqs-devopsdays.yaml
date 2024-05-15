@@ -66,7 +66,7 @@ spec:
 
           *criado por: [Backstage Software Template](https://backstage.io/docs/features/software-templates)* 👷‍♂️⚙️👷‍♀️
         sourcePath: ./outputs/terraform
-        targetPath: '/terraform/aws/production/sqs/${{ parameters.name }}'
+        targetPath: 'terraform/aws/production/sqs/${{ parameters.name }}'
 
     - id: label_pr
       name: Adiciona labels no PR
