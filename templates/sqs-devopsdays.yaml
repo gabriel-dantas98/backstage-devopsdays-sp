@@ -34,7 +34,7 @@ spec:
           ui:options:
             rows: 5
         company:
-          title: Diz pra gente qual você trabalha
+          title: Diz pra gente qual empresa você trabalha
           type: string
           ui:options:
             rows: 5
