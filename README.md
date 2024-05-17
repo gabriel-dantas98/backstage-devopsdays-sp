@@ -1,10 +1,16 @@
-# [Backstage](https://backstage.io)
+# DevopsDays Portal - DevopsDays SP 2024
 
-This is your newly scaffolded Backstage App, Good Luck!
+<p align="center">
+    <img src="assets/backstage-example.png" alt="Logo" width="900" height="300">
+    <p align="center">
+  Repositório criado para a talk Backstage 💚 Terraform - Uma combinação poderosa para Ops, maravilhosa para Devs
+  </p>
+</p>
 
-To start the app, run:
+Para rodar localmente:
 
 ```sh
+export GITHUB_TOKEN=<seu-personal-access-token>
 yarn install
 yarn dev
 ```
