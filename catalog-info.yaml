@@ -8,7 +8,10 @@ metadata:
   #   github.com/project-slug: backstage/backstage
   #   backstage.io/techdocs-ref: dir:.
   annotations:
-    backstage.io/adr-location: docs/adrs
+    backstage.io/adr-location: ./docs/adrs
+    backstage.io/source-location: url:https://github.com/gabriel-dantas98/backstage-devopsdays-sp/blob/main/
+    backstage.io/managed-by-origin-location: url:https://github.com/gabriel-dantas98/backstage-devopsdays-sp/blob/main/catalog-info.yaml
+    backstage.io/managed-by-location: url:https://github.com/gabriel-dantas98/backstage-devopsdays-sp/blob/main/catalog-info.yaml
 spec:
   type: website
   owner: guest
