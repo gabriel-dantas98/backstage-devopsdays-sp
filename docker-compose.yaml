@@ -1,0 +1,32 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    container_name: postgres-backstage
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "root"
+      POSTGRES_DB: "backstage"
+      PGDATA: /tmp/backstage-postgres:/var/lib/postgresql/data
+    volumes:
+      - /tmp/backstage-postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backstage:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "root"
+      POSTGRES_DATABASE: "backstage"
+      BACKEND_SECRET: frMHB8zaE5w8zUMEBLyh%
+      # generate yourself secret 
+      # openssl rand -base64 15 | tr -dc 'a-zA-Z0-9' | head -c 20
+    ports:
+      - '7007:7007'
+    depends_on:
+      - postgres
